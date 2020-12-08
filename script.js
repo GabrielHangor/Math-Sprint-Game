@@ -94,9 +94,29 @@ function getRadioValue() {
   return radioValue;
 }
 
-// Form that decided amount of questions
+// Displays 3, 2, 1 GO!
+function countdownStart() {
+  let messages = ["3", "2", "1", "GO!"];
+  for (let i = 0; i < messages.length; i++) {
+    setTimeout(() => {
+      countdown.textContent = messages[i];
+    }, 1000 * i);
+  }
+}
+
+// Navigate from splash page to countdown page
+function showCountdown() {
+  countdownPage.hidden = false;
+  splashPage.hidden = true;
+  countdownStart();
+}
+
+// Get the questions amount
 function selectQuestionAmount(e) {
   questionAmount = getRadioValue();
+  if (questionAmount) {
+    showCountdown();
+  }
   e.preventDefault();
 }
 
