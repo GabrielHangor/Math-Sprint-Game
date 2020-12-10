@@ -254,22 +254,28 @@ function getRadioValue() {
 }
 
 // Displays 3, 2, 1 GO!
-function countdownStart() {
-  let messages = ["3", "2", "1", "GO!"];
-  for (let i = 0; i < messages.length; i++) {
-    setTimeout(() => {
-      countdown.textContent = messages[i];
-    }, 1000 * i);
-  }
+function countDownStart() {
+  let count = 3;
+  countdown.textContent = count;
+  const timeCountDown = setInterval(() => {
+    count--;
+    if (count === 0) {
+      countdown.textContent = "GO!";
+    } else if (count === -1) {
+      showGamePage();
+      clearInterval(timeCountDown);
+    } else {
+      countdown.textContent = count;
+    }
+  }, 1000);
 }
 
 // Navigate from splash page to countdown page
 function showCountdown() {
   countdownPage.hidden = false;
   splashPage.hidden = true;
-  countdownStart();
   populateGamePage();
-  setTimeout(showGamePage, 4000);
+  countDownStart();
 }
 
 // Get the questions amount
